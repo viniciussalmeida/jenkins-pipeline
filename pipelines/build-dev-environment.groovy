@@ -19,9 +19,9 @@ pipeline {
         stage('Checkout GIT repository') {
             steps {     
               script {
-                git branch: 'master',
-                credentialsId: '21f01d09-06da9cc35103',
-                url: 'git@mysecret-nonexistent-repo/jenkins.git'
+                git branch: 'develop',
+                // credentialsId: '21f01d09-06da9cc35103',
+                url: 'https://github.com/viniciussalmeida/jenkins-pipeline.git'
               }
             }
         }
