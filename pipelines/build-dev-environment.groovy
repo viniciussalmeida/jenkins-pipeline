@@ -25,6 +25,19 @@ pipeline {
               }
             }
         }
+        try {
+          stage('Check if MySQL port number is valid') {
+            if (("$params.MYSQL_PORT" =~ ^[0-9]+$) && ("$params.MYSQL_PORT" -ge 1) && ("$params.MYSQL_PORT" -le 65536)) {
+              echo "Port number is valid!"
+            }
+            else {
+              error("Port number is not valid!")
+            }
+        }
+        catch(Exception error) {
+          currentBuild.result = 'ABORTED'
+          return
+        }
         stage('Create latest Docker image') {
             steps {     
               script {
